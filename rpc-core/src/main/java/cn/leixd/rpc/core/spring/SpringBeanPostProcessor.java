@@ -34,13 +34,6 @@ import java.util.Map;
 @Component
 public class SpringBeanPostProcessor implements BeanPostProcessor {
 
-//    private final RegistryService registryService;
-//    private final RpcRequestTransport rpcClient;
-//
-//    public SpringBeanPostProcessor() {
-//        this.registryService =
-////        this.rpcClient = ExtensionLoader.getExtensionLoader(RpcRequestTransport.class).getExtension(RpcRequestTransportEnum.NETTY.getName());
-//    }
 
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
@@ -49,10 +42,6 @@ public class SpringBeanPostProcessor implements BeanPostProcessor {
         if (rpcService != null) {
             RegistryConfig registryConfig = ConfigManager.getInstant().getRegistryConfig();
             RegistryService registry = SingletonFactory.getInstance(ZkRegistryFactory.class).getRegistry(registryConfig.toURL());
-            System.out.println(registryConfig.toString());
-            System.out.println("--------------");
-            System.out.println(registryConfig.toURL());
-            System.out.println(buildServiceURL(bean, rpcService));
             registry.register(buildServiceURL(bean, rpcService));
             // 然后把服务放到缓存中，方便后续通过 rpcServiceName 获取服务
             RpcServiceCache.addService(rpcService.version(), bean);
