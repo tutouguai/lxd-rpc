@@ -5,8 +5,6 @@ package cn.leixd.demo.serve;
 /**
  * 用户服务
  *
- * @author chenchuxin
- * @date 2021/8/2
  */
 public interface UserService {
 
