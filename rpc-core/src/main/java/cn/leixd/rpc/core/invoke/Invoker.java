@@ -3,7 +3,9 @@ package cn.leixd.rpc.core.invoke;
 import cn.leixd.rpc.core.dto.RpcRequest;
 import cn.leixd.rpc.core.dto.RpcResult;
 import cn.lxd.rpc.common.constants.RpcException;
+import cn.lxd.rpc.common.extension.SPI;
 
+@SPI("netty")
 public interface Invoker {
     /**
      * 执行

@@ -6,7 +6,7 @@ import cn.leixd.rpc.core.dto.RpcRequest;
 import cn.leixd.rpc.core.dto.RpcResult;
 import cn.leixd.rpc.core.loadbalance.LoadBalance;
 import cn.leixd.rpc.core.loadbalance.RandomLoadBalance;
-import cn.leixd.rpc.core.registry.RegistryService;
+import cn.leixd.rpc.core.registry.Registry;
 import cn.leixd.rpc.core.registry.zk.ZkRegistryFactory;
 import cn.lxd.rpc.common.constants.RpcException;
 import cn.lxd.rpc.common.constants.URLKeyConst;
@@ -22,7 +22,7 @@ import java.util.Map;
  */
 public abstract class AbstractInvoker implements Invoker{
 
-    private final RegistryService registry = SingletonFactory.getInstance(ZkRegistryFactory.class)
+    private final Registry registry = SingletonFactory.getInstance(ZkRegistryFactory.class)
             .getRegistry(ConfigManager.getInstant().getRegistryConfig().toURL());
     //TODO:优化为SPI拓展
     private final LoadBalance loadBalance = SingletonFactory.getInstance(RandomLoadBalance.class);

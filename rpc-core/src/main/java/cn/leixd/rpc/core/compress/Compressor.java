@@ -1,10 +1,13 @@
 package cn.leixd.rpc.core.compress;
 
 
+import cn.lxd.rpc.common.extension.SPI;
+
 /**
  * 压缩解压器
  *
  */
+@SPI("dummy")
 public interface Compressor {
 
     /**

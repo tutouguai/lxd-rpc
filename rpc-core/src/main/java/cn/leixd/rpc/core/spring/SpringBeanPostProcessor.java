@@ -9,9 +9,11 @@ import cn.leixd.rpc.core.config.RegistryConfig;
 import cn.leixd.rpc.core.config.ServiceConfig;
 import cn.leixd.rpc.core.proxy.RpcClientProxy;
 import cn.leixd.rpc.core.proxy.RpcServiceCache;
-import cn.leixd.rpc.core.registry.RegistryService;
+import cn.leixd.rpc.core.registry.Registry;
+import cn.leixd.rpc.core.registry.RegistryFactory;
 import cn.leixd.rpc.core.registry.zk.ZkRegistryFactory;
 import cn.lxd.rpc.common.constants.URLKeyConst;
+import cn.lxd.rpc.common.extension.ExtensionLoader;
 import cn.lxd.rpc.common.factory.SingletonFactory;
 import cn.lxd.rpc.common.url.URL;
 import lombok.extern.slf4j.Slf4j;
@@ -40,17 +42,19 @@ public class SpringBeanPostProcessor implements BeanPostProcessor {
         RpcService rpcService = bean.getClass().getAnnotation(RpcService.class);
         //RPC服务注册到zk中
         if (rpcService != null) {
+            //改成SPI拓展
+            RegistryFactory registryFactory = ExtensionLoader.getLoader(RegistryFactory.class).getAdaptiveExtension();
             RegistryConfig registryConfig = ConfigManager.getInstant().getRegistryConfig();
-            RegistryService registry = SingletonFactory.getInstance(ZkRegistryFactory.class).getRegistry(registryConfig.toURL());
+            Registry registry = registryFactory.getRegistry(registryConfig.toURL());
             registry.register(buildServiceURL(bean, rpcService));
-            // 然后把服务放到缓存中，方便后续通过 rpcServiceName 获取服务
+            // 然后把服务放到缓存中
             RpcServiceCache.addService(rpcService.version(), bean);
         }
         return bean;
     }
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
-        //TODO:客户端获取服务端bean时生成代理对象
+        //客户端获取服务端bean时生成代理对象
         Field[] fields = bean.getClass().getDeclaredFields();
         for (Field field : fields) {
             RpcReference rpcReference = field.getAnnotation(RpcReference.class);

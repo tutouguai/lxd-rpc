@@ -1,8 +1,8 @@
 # lxd-rpc
 
 #### 介绍
-这是一个基于 Netty + Zookeeper + Protostuff 的简易 RPC 框架。
-在对在线测评系统重构过程中，使用到了feign，对另一种远程调用方式产生了好奇，造轮子主要是为了了解其内部运作机制。
+lxd-rpc是一款基于 Netty + Zookeeper + Protostuff 的简易 RPC 框架。
+在对在线测评系统重构过程中，使用到了feign，对另一种远程调用方式产生了好奇，重复造轮子主要是为了学习和了解其内部运作机制。
 
 Github:https://github.com/tutouguai/lxd-rpc
 
@@ -10,7 +10,7 @@ Github:https://github.com/tutouguai/lxd-rpc
 以下是重要的包的简介：
 ```
 |- lxd-rpc-common：基础的代码
-  |- extendsion：扩展，为后续使用SPI机制进行拓展预留位置
+  |- extendsion：SPI扩展
   |- factory: 单例对象工厂，用于产生单例对象
   |- url: 参考 dubbo 的 URL，构建参数用的
 |- lxd-rpc-core: rpc 核心逻辑
@@ -63,7 +63,7 @@ Github:https://github.com/tutouguai/lxd-rpc
     
 - [x] 多版本
 
-- [ ] 自定义 SPI 扩展
+- [x] 自定义 SPI 扩展
 
 - [ ] 集群容错
     - [ ] 重试策略

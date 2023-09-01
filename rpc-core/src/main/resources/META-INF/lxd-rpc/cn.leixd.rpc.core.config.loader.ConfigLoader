@@ -1,0 +1,2 @@
+system-property=cn.leixd.rpc.core.config.loader.SystemPropertyLoader
+properties=cn.leixd.rpc.core.config.loader.PropertiesConfigLoader

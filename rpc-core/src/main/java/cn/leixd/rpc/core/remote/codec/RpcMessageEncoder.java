@@ -9,6 +9,7 @@ import cn.leixd.rpc.core.consts.SerializeType;
 import cn.leixd.rpc.core.dto.RpcMessage;
 import cn.leixd.rpc.core.serialize.Serializer;
 import cn.leixd.rpc.core.serialize.protostuff.ProtostuffSerializer;
+import cn.lxd.rpc.common.extension.ExtensionLoader;
 import cn.lxd.rpc.common.factory.SingletonFactory;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
@@ -86,13 +87,14 @@ public class RpcMessageEncoder extends MessageToByteEncoder<RpcMessage> {
         if (serializeType == null) {
             throw new IllegalArgumentException("codec type not found");
         }
-        //TODO:改成SPI拓展
-        Serializer serializer = SingletonFactory.getInstance(ProtostuffSerializer.class);
-
+        //改成SPI拓展
+//        Serializer serializer = SingletonFactory.getInstance(ProtostuffSerializer.class);
+        Serializer serializer = ExtensionLoader.getLoader(Serializer.class).getExtension(serializeType.getName());
         // 压缩器
         CompressType compressType = CompressType.fromValue(rpcMessage.getCompressTye());
         //TODO:改成SPI拓展
-        Compressor compressor = SingletonFactory.getInstance(DummyCompressor.class);
+//        Compressor compressor = SingletonFactory.getInstance(DummyCompressor.class);
+        Compressor compressor = ExtensionLoader.getLoader(Compressor.class).getExtension(compressType.getName());
         // 序列化
         byte[] notCompressBytes = serializer.serialize(rpcMessage.getData());
         // 压缩

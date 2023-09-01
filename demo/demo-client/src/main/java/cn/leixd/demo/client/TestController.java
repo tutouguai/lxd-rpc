@@ -1,7 +1,7 @@
 package cn.leixd.demo.client;
 
 
-import cn.leixd.demo.serve.UserService;
+import cn.leixd.demo.UserService;
 import cn.leixd.rpc.core.annotaion.RpcReference;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,12 +19,16 @@ public class TestController {
     private UserService userService2;
 
     @GetMapping("/{uid}")
-    public void getUser(@PathVariable("uid") long uid) {
-        System.out.println(userService.getUser(uid).toString());
+    public String getUser(@PathVariable("uid") long uid) {
+        String result=  this.userService.getUser(uid).toString();
+        System.out.println(result);
+        return result;
     }
 
     @GetMapping("/v2/{uid}")
-    public void getUserV2(@PathVariable("uid") long uid) {
-        System.out.println(userService2.getUser(uid).toString());
+    public String getUserV2(@PathVariable("uid") long uid) {
+        String result=  this.userService2.getUser(uid).toString();
+        System.out.println(result);
+        return result;
     }
 }

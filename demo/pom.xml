@@ -14,6 +14,7 @@
     <modules>
         <module>demo-serve</module>
         <module>demo-client</module>
+        <module>demo-interface</module>
     </modules>
 
     <properties>

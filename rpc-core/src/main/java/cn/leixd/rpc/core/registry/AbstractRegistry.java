@@ -19,7 +19,7 @@ import static cn.leixd.rpc.core.registry.RegistryEvent.Type.*;
  *
  */
 @Slf4j
-public abstract class AbstractRegistry implements RegistryService {
+public abstract class AbstractRegistry implements Registry {
 
     /**
      * 已注册的服务的本地缓存。{serviceName: [URL]}

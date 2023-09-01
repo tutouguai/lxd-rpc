@@ -10,6 +10,7 @@ import cn.leixd.rpc.core.dto.RpcRequest;
 import cn.leixd.rpc.core.dto.RpcResponse;
 import cn.leixd.rpc.core.serialize.Serializer;
 import cn.leixd.rpc.core.serialize.protostuff.ProtostuffSerializer;
+import cn.lxd.rpc.common.extension.ExtensionLoader;
 import cn.lxd.rpc.common.factory.SingletonFactory;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
@@ -113,8 +114,9 @@ public class RpcMessageDecoder extends LengthFieldBasedFrameDecoder {
         in.readBytes(bodyBytes);
         // 解压
         CompressType compressType = CompressType.fromValue(compress);
-        //TODO:改成SPI拓展
-        Compressor compressor = SingletonFactory.getInstance(DummyCompressor.class);
+        //改成SPI拓展
+//        Compressor compressor = SingletonFactory.getInstance(DummyCompressor.class);
+        Compressor compressor = ExtensionLoader.getLoader(Compressor.class).getExtension(compressType.getName());
         byte[] decompressedBytes = compressor.decompress(bodyBytes);
 
         // 反序列化
@@ -122,8 +124,9 @@ public class RpcMessageDecoder extends LengthFieldBasedFrameDecoder {
         if (serializeType == null) {
             throw new IllegalArgumentException("unknown codec type:" + codec);
         }
-        //TODO:改成SPI拓展
-        Serializer serializer = SingletonFactory.getInstance(ProtostuffSerializer.class);
+        //改成SPI拓展
+//        Serializer serializer = SingletonFactory.getInstance(ProtostuffSerializer.class);
+        Serializer serializer = ExtensionLoader.getLoader(Serializer.class).getExtension(serializeType.getName());
         Class<?> clazz = messageType == MessageType.REQUEST.getValue() ? RpcRequest.class : RpcResponse.class;
         Object object = serializer.deserialize(decompressedBytes, clazz);
         rpcMessage.setData(object);

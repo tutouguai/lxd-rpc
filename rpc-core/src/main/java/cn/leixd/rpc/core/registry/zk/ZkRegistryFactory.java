@@ -1,7 +1,7 @@
 package cn.leixd.rpc.core.registry.zk;
 
 import cn.leixd.rpc.core.registry.RegistryFactory;
-import cn.leixd.rpc.core.registry.RegistryService;
+import cn.leixd.rpc.core.registry.Registry;
 import cn.lxd.rpc.common.url.URL;
 
 import java.util.Map;
@@ -16,7 +16,7 @@ public class ZkRegistryFactory implements RegistryFactory {
     private static final Map<URL, ZkRegistry> cache = new ConcurrentHashMap<>();
 
     @Override
-    public RegistryService getRegistry(URL url) {
+    public Registry getRegistry(URL url) {
         if (cache.containsKey(url)) {
             return cache.get(url);
         }

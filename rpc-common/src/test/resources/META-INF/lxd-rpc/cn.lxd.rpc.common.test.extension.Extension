@@ -1,0 +1,2 @@
+default=cn.leixd.rpc.common.test.extension.DefaultExtension
+other=cn.leixd.rpc.common.test.extension.OtherExtension

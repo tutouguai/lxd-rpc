@@ -2,6 +2,7 @@ package cn.leixd.rpc.core.loadbalance;
 
 
 import cn.leixd.rpc.core.dto.RpcRequest;
+import cn.lxd.rpc.common.extension.SPI;
 import cn.lxd.rpc.common.url.URL;
 
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.List;
  *
 
  */
+@SPI("random")
 public interface LoadBalance {
 
     /**

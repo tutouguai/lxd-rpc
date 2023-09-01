@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * 注册中心
  */
-public interface RegistryService {
+public interface Registry {
     /**
      * 注册数据，比如：提供者地址，消费者地址，路由规则，覆盖规则，等数据。
      *

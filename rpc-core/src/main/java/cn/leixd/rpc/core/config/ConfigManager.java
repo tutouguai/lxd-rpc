@@ -5,6 +5,7 @@ import cn.hutool.core.util.StrUtil;
 import cn.leixd.rpc.core.annotaion.Config;
 import cn.leixd.rpc.core.config.loader.ConfigLoader;
 import cn.leixd.rpc.core.config.loader.PropertiesConfigLoader;
+import cn.lxd.rpc.common.extension.ExtensionLoader;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
@@ -28,9 +29,12 @@ public class ConfigManager {
 
     private ConfigManager() {
         // 按照优先级放好
-//        String[] configLoaderNames = new String[]{"system-property", "properties"};//TODO：优化成SPI拓展
-        configLoaders = new ArrayList<>(1);
-        configLoaders.add(new PropertiesConfigLoader());
+        String[] configLoaderNames = new String[]{"system-property", "properties"};
+        configLoaders = new ArrayList<>(configLoaderNames.length);
+        for (String loaderName : configLoaderNames) {
+            ConfigLoader configLoader = ExtensionLoader.getLoader(ConfigLoader.class).getExtension(loaderName);
+            configLoaders.add(configLoader);
+        }
     }
 
     private static final ConfigManager instant = new ConfigManager();

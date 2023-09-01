@@ -9,6 +9,7 @@
     </option>
     <option name="ignoredFiles">
       <set>
+        <option value="$PROJECT_DIR$/demo-interface/pom.xml" />
         <option value="$PROJECT_DIR$/lxd-demo/demo-client/pom.xml" />
         <option value="$PROJECT_DIR$/lxd-demo/demo-serve/pom.xml" />
         <option value="$PROJECT_DIR$/lxd-demo/pom.xml" />

@@ -1,10 +1,13 @@
 package cn.leixd.rpc.core.config.loader;
 
 
+import cn.lxd.rpc.common.extension.SPI;
+
 /**
  * 配置加载器
  *
  */
+@SPI
 public interface ConfigLoader {
 
     /**

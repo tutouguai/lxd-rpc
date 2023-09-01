@@ -1,10 +1,13 @@
 package cn.leixd.rpc.core.serialize;
 
 
+import cn.lxd.rpc.common.extension.SPI;
+
 /**
  * 序列化器
  *
  */
+@SPI("protostuff")
 public interface Serializer {
 
     /**

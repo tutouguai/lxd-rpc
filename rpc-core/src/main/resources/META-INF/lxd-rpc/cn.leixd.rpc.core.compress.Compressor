@@ -1,0 +1,2 @@
+dummy=cn.leixd.rpc.core.compress.DummyCompressor
+gzip=cn.leixd.rpc.core.compress.GzipCompressor
