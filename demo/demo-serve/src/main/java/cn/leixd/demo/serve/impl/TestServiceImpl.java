@@ -1,15 +1,12 @@
 package cn.leixd.demo.serve.impl;
 
 import cn.leixd.demo.User;
-import cn.leixd.demo.UserService;
+import cn.leixd.demo.TestService;
 import cn.leixd.rpc.core.annotaion.RpcService;
 
-/**
- * 用户服务
- *
- */
+
 @RpcService(version = "v1")
-public class UserServiceImpl implements UserService {
+public class TestServiceImpl implements TestService {
 
     @Override
     public User getUser(Long id) {

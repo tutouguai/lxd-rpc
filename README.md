@@ -82,4 +82,4 @@ Github:https://github.com/tutouguai/lxd-rpc
 2. 需要安装 `Zookeeper`3.5.x及以上版本 并运行
 3. 修改配置文件 `lxd-rpc.properties` 中的 zookeeper地址、监听端口，启动服务 `cn.leixd.rpc.demo.service.ServiceBootstrap`
 4. 修改配置文件 `lxd-rpc.properties` 中的 zk 地址，启动客户端 `cn.leixd.rpc.demo.client.ClientBootstrap`
-5. 访问客户端地址 `http://localhost:8864/user/v1/1` 就可以啦. `http://localhost:8864/user/v2/1` 可以访问另一个实现，这是多版本功能。
+5. 访问客户端地址 `http://localhost:1234/user/v1/1` 就可以啦. `http://localhost:1234/user/v2/1` 可以访问另一个实现，这是多版本功能。
