@@ -22,5 +22,4 @@ public interface URLKeyConst {
 
     String LXD_RPC_PROTOCOL = "lxd-rpc";
 
-    String CORE_RPC_PROTOCOL = "core-rpc";
 }

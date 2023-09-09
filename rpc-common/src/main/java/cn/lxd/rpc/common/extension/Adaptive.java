@@ -1,7 +1,6 @@
 package cn.lxd.rpc.common.extension;
 
 
-import cn.lxd.rpc.common.url.URL;
 
 import java.lang.annotation.*;
 
