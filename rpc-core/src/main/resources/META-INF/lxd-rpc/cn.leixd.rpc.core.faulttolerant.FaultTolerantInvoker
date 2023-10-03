@@ -1,0 +1,2 @@
+retry=cn.leixd.rpc.core.faulttolerant.RetryInvoker
+fail-fast=cn.leixd.rpc.core.faulttolerant.FailFastInvoker

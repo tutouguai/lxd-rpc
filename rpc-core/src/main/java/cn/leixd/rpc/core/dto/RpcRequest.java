@@ -42,4 +42,7 @@ public class RpcRequest {
         }
         return interfaceName + "_" + version;
     }
+    public String getFullMethodName(){
+        return interfaceName + "."+ methodName;
+    }
 }

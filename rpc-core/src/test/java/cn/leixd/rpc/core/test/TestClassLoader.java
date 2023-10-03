@@ -13,7 +13,6 @@ public class TestClassLoader {
     public static void main(String[] args) throws IOException {
         // 使用ClassLoader加载文件
         String path = "test.txt";
-//        String path = "META-INF/lxd-rpc/cn.lxd.rpc.common.test.extension.Extension";
         ClassLoader classLoader = TestClassLoader.class.getClassLoader();
         InputStream inputStream = classLoader.getResourceAsStream(path);
 

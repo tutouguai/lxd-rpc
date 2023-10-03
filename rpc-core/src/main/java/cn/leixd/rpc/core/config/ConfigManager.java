@@ -132,4 +132,7 @@ public class ConfigManager {
         return loadConfig(ProtocolConfig.class);
     }
 
+    public ClusterConfig getClusterConfig(){
+        return loadConfig(ClusterConfig.class);
+    }
 }

@@ -86,6 +86,7 @@ public class ExtensionLoader<T> {
         if (!type.isInterface()) {
             throw new IllegalStateException(type.getName() + " is not interface");
         }
+        System.out.println(type.getName());
         SPI annotation = type.getAnnotation(SPI.class);
         if (annotation == null) {
             throw new IllegalStateException(type.getName() + " has not @SPI annotation.");

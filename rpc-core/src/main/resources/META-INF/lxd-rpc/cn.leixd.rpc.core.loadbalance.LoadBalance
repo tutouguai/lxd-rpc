@@ -1,2 +1,3 @@
 random=cn.leixd.rpc.core.loadbalance.RandomLoadBalance
 round-robin=cn.leixd.rpc.core.loadbalance.RoundRobinLoadBalance
+least-active=cn.leixd.rpc.core.loadbalance.LeastActiveLoadBalance

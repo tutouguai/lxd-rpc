@@ -58,7 +58,7 @@ public class SpringBeanPostProcessor implements BeanPostProcessor {
         Field[] fields = bean.getClass().getDeclaredFields();
         for (Field field : fields) {
             RpcReference rpcReference = field.getAnnotation(RpcReference.class);
-            if (rpcReference != null) {
+            if (rpcReference != null) {//TODO:看能不能优化成hash查找
                 // 生成代理对象
                 RpcClientProxy rpcClientProxy = new RpcClientProxy(rpcReference);
                 Object proxy = rpcClientProxy.getProxy(field.getType());

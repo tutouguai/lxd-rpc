@@ -1,11 +1,15 @@
 package cn.leixd.rpc.core.proxy;
 
 import cn.leixd.rpc.core.annotaion.RpcReference;
+import cn.leixd.rpc.core.config.ConfigManager;
 import cn.leixd.rpc.core.dto.RpcRequest;
 import cn.leixd.rpc.core.dto.RpcResponse;
 import cn.leixd.rpc.core.dto.RpcResult;
+import cn.leixd.rpc.core.faulttolerant.FaultTolerantInvoker;
 import cn.leixd.rpc.core.invoke.Invoker;
 import cn.leixd.rpc.core.invoke.NettyInvoker;
+import cn.leixd.rpc.core.loadbalance.ServiceStatus;
+import cn.lxd.rpc.common.extension.ExtensionLoader;
 import cn.lxd.rpc.common.factory.SingletonFactory;
 import lombok.SneakyThrows;
 
@@ -49,7 +53,9 @@ public class RpcClientProxy implements InvocationHandler {
                 .version(rpcReference.version())
                 .build();
         // invoke 发送请求，获取结果
-        Invoker invoker = SingletonFactory.getInstance(NettyInvoker.class);
+
+        ExtensionLoader<FaultTolerantInvoker> loader = ExtensionLoader.getLoader(FaultTolerantInvoker.class);
+        FaultTolerantInvoker invoker = loader.getExtension(ConfigManager.getInstant().getClusterConfig().getFaultTolerant());
         RpcResult rpcResult = invoker.invoke(request);
         return ((RpcResponse<?>) rpcResult.getData()).getData();
     }

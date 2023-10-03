@@ -17,7 +17,7 @@ public class RoundRobinLoadBalance extends AbstractLoadBalance {
     private final LongAdder curIndex = new LongAdder();
 
     @Override
-    protected URL doSelect(List<URL> candidateUrls, RpcRequest request) {
+    protected URL doSelect(List<URL> candidateUrls, RpcRequest request, String ... urls) {
         int index = (int) (curIndex.longValue() % candidateUrls.size());
         curIndex.increment();
         return candidateUrls.get(index);

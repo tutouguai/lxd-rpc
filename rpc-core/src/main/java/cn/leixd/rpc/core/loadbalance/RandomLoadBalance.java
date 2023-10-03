@@ -13,7 +13,7 @@ import java.util.List;
 public class RandomLoadBalance extends AbstractLoadBalance {
 
     @Override
-    protected URL doSelect(List<URL> candidateUrls, RpcRequest request) {
+    protected URL doSelect(List<URL> candidateUrls, RpcRequest request, String ... urls) {
         int size = candidateUrls.size();
         int index = RandomUtil.randomInt(size);
         return candidateUrls.get(index);

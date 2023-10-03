@@ -22,5 +22,5 @@ public interface LoadBalance {
      * @param request       请求
      * @return 选择的 URL
      */
-    URL select(List<URL> candidateUrls, RpcRequest request);
+    URL select(List<URL> candidateUrls, RpcRequest request, String ... urls);
 }

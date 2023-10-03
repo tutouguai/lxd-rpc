@@ -7,6 +7,7 @@ import cn.leixd.rpc.core.consts.MessageFormatConst;
 import cn.leixd.rpc.core.consts.MessageType;
 import cn.leixd.rpc.core.consts.SerializeType;
 import cn.leixd.rpc.core.dto.*;
+import cn.leixd.rpc.core.loadbalance.ServiceStatus;
 import cn.leixd.rpc.core.remote.client.netty.NettyClient;
 import cn.leixd.rpc.core.remote.client.netty.UnprocessedRequests;
 import cn.lxd.rpc.common.constants.RpcException;
@@ -36,11 +37,16 @@ public class NettyInvoker extends AbstractInvoker {
             // 构建 RPC 消息，此处会构建 requestId
             RpcMessage rpcMessage = buildRpcMessage(request);
             UnprocessedRequests.put(rpcMessage.getRequestId(), resultFuture);
+            long start = System.currentTimeMillis();
             channel.writeAndFlush(rpcMessage).addListener((ChannelFutureListener) future -> {
                 if (future.isSuccess()) {
                     log.info("client send message: [{}]", rpcMessage);
+                    long elapsed = System.currentTimeMillis() - start;
+                    ServiceStatus.endCount(selected.toFullString(), request.getFullMethodName(), elapsed, true);
                 } else {
                     future.channel().close();
+                    long elapsed = System.currentTimeMillis() - start;
+                    ServiceStatus.endCount(selected.toFullString(), request.getFullMethodName(), elapsed, false);
                     resultFuture.completeExceptionally(future.cause());
                     log.error("send failed:", future.cause());
                 }

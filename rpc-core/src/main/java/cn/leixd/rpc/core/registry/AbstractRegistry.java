@@ -98,6 +98,12 @@ public abstract class AbstractRegistry implements Registry {
         return urls;
     }
 
+//    public Set<URL> lookupSet(URL condition){
+//        String serviceName = getServiceNameFromUrl(condition);
+//        if (registered.containsKey(serviceName)) {
+//            return registered.get(serviceName).stream().map(URL::valueOf).collect(Collectors.toSet());
+//        }
+//    }
     /**
      * 取消所有本机的服务，用于关机的时候
      */
