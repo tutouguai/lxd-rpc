@@ -69,9 +69,9 @@ Github:https://github.com/tutouguai/lxd-rpc
 
 - [x] 集群容错
     - [x] 重试策略
-    - [x] 快速失败策略
       - [x] 重试幂等
-    
+    - [x] 快速失败策略
+
 - [ ] 优雅停机
 
 - [ ] 监控后台
