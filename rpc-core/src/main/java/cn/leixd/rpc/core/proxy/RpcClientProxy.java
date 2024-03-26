@@ -6,6 +6,7 @@ import cn.leixd.rpc.core.dto.RpcRequest;
 import cn.leixd.rpc.core.dto.RpcResponse;
 import cn.leixd.rpc.core.dto.RpcResult;
 import cn.leixd.rpc.core.faulttolerant.FaultTolerantInvoker;
+import cn.leixd.rpc.core.idempotent.RequestIdUtils;
 import cn.leixd.rpc.core.invoke.Invoker;
 import cn.leixd.rpc.core.invoke.NettyInvoker;
 import cn.leixd.rpc.core.loadbalance.ServiceStatus;
@@ -51,6 +52,7 @@ public class RpcClientProxy implements InvocationHandler {
                 .params(args)
                 .paramTypes(method.getParameterTypes())
                 .version(rpcReference.version())
+                .RequestId(RequestIdUtils.snowFlakeIdWorker.nextId())
                 .build();
         // invoke 发送请求，获取结果
 

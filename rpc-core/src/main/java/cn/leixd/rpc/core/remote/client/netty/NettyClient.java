@@ -32,7 +32,7 @@ public class NettyClient {
      */
     private static final Map<SocketAddress, Channel> CHANNEL_MAP = new ConcurrentHashMap<>();
 
-    private static NettyClient instance = null;
+    private static volatile NettyClient instance = null;
 
     public static NettyClient getInstance() {
         if (instance == null) {

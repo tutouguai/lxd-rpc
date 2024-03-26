@@ -5,16 +5,15 @@ import cn.leixd.rpc.core.config.ConfigManager;
 import cn.leixd.rpc.core.dto.RpcRequest;
 import cn.leixd.rpc.core.dto.RpcResult;
 import cn.leixd.rpc.core.invoke.Invoker;
-import cn.leixd.rpc.core.loadbalance.LoadBalance;
 import cn.lxd.rpc.common.constants.RpcException;
 import cn.lxd.rpc.common.extension.ExtensionLoader;
 
 public abstract class AbstractFaultTolerantInvoker implements FaultTolerantInvoker{
 
     protected final ClusterConfig clusterConfig = ConfigManager.getInstant().getClusterConfig();
-//    private final LoadBalance loadBalance = ExtensionLoader.getLoader(LoadBalance.class)
-//            .getExtension(clusterConfig.getLoadBalance());
+
     //nettyInvoker
+    //TODO:增加更多通信方式,使得框架适用更多场景
     private final Invoker invoker = ExtensionLoader.getLoader(Invoker.class).getDefaultExtension();
 
 

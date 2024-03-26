@@ -36,6 +36,8 @@ public class RpcRequest {
      */
     private String version;
 
+    private Long RequestId;
+
     public String getRpcServiceForCache() {
         if (StrUtil.isBlank(version)) {
             return interfaceName;

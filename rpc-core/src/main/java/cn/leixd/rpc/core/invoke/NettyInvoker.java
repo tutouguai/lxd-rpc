@@ -3,7 +3,6 @@ package cn.leixd.rpc.core.invoke;
 import cn.leixd.rpc.core.config.ConfigManager;
 import cn.leixd.rpc.core.config.ProtocolConfig;
 import cn.leixd.rpc.core.consts.CompressType;
-import cn.leixd.rpc.core.consts.MessageFormatConst;
 import cn.leixd.rpc.core.consts.MessageType;
 import cn.leixd.rpc.core.consts.SerializeType;
 import cn.leixd.rpc.core.dto.*;
@@ -39,7 +38,7 @@ public class NettyInvoker extends AbstractInvoker {
             UnprocessedRequests.put(rpcMessage.getRequestId(), resultFuture);
             long start = System.currentTimeMillis();
             channel.writeAndFlush(rpcMessage).addListener((ChannelFutureListener) future -> {
-                if (future.isSuccess()) {
+                if (future.isSuccess()) {//发送消息成功
                     log.info("client send message: [{}]", rpcMessage);
                     long elapsed = System.currentTimeMillis() - start;
                     ServiceStatus.endCount(selected.toFullString(), request.getFullMethodName(), elapsed, true);
@@ -81,7 +80,7 @@ public class NettyInvoker extends AbstractInvoker {
                 .messageType(MessageType.REQUEST.getValue())
                 .compressTye(compressType.getValue())
                 .serializeType(serializeType.getValue())
-                .requestId(MessageFormatConst.REQUEST_ID.getAndIncrement())
+                .requestId(request.getRequestId())//MessageFormatConst.REQUEST_ID.getAndIncrement()
                 .data(request)
                 .build();
     }
