@@ -18,6 +18,7 @@ Github:https://github.com/tutouguai/lxd-rpc
   |- compress: 压缩，网络传输需要压缩数据
   |- config: 定义了一套配置的接口，例如配置服务绑定的端口，zookeeper的地址等
   |- loadbalance: 负载均衡，多个服务应该如何选择。有随机策略、轮询策略等，目前固定为随机策略
+  |- faulttolareant: 集群容错，目前主要有快速失败、失败重试策略，默认为快速失败策略
   |- proxy: 代理，用于客户端代理，客户端调用服务接口，实际上是一个网络请求的过程
   |- registry: 注册中心，例如Nacos 注册中心、 zookeeper注册中心
   |- remote: 网络相关的东西，例如自定义协议、Netty 收发请求等,协议后续需要改进
@@ -69,6 +70,7 @@ Github:https://github.com/tutouguai/lxd-rpc
 - [x] 集群容错
     - [x] 重试策略
     - [x] 快速失败策略
+      - [x] 重试幂等
     
 - [ ] 优雅停机
 
